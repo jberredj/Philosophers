@@ -6,7 +6,7 @@
 /*   By: jberredj <jberredj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 23:04:04 by jberredj          #+#    #+#             */
-/*   Updated: 2021/12/30 23:28:27 by jberredj         ###   ########.fr       */
+/*   Updated: 2022/01/08 21:03:41 by jberredj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	attribute_forks(pthread_mutex_t *table_forks,
 	pthread_mutex_t *philo_forks[2], int nbr_philos, int id)
 {
 	philo_forks[id % 2] = &table_forks[get_fork_id(id, nbr_philos)];
-	philo_forks[((id % 2) + 1) % 2]
+	philo_forks[(id + 1) % 2]
 		= &table_forks[get_fork_id(id + 1, nbr_philos)];
 }
 

@@ -6,7 +6,7 @@
 /*   By: jberredj <jberredj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 23:01:20 by jberredj          #+#    #+#             */
-/*   Updated: 2021/12/30 23:42:26 by jberredj         ###   ########.fr       */
+/*   Updated: 2022/01/08 21:06:11 by jberredj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	check_satiated(t_philos *self)
 	{
 		pthread_mutex_lock(self->satiated_mt);
 		(*self->notify_satiation)++;
+		self->satiated = true;
 		pthread_mutex_unlock(self->satiated_mt);
 	}
 }
