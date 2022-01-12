@@ -6,7 +6,7 @@
 /*   By: jberredj <jberredj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 23:01:20 by jberredj          #+#    #+#             */
-/*   Updated: 2021/12/30 23:42:26 by jberredj         ###   ########.fr       */
+/*   Updated: 2022/01/13 00:47:51 by jberredj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,16 @@ static void	eat(t_philos *self)
 {
 	pthread_mutex_lock(self->forks[0]);
 	log_philo(self, TAKE_FORK, false);
-	pthread_mutex_lock(self->forks[1]);
-	log_philo(self, TAKE_FORK, false);
+	if (self->forks[1] != self->forks[0])
+	{
+		pthread_mutex_lock(self->forks[1]);
+		log_philo(self, TAKE_FORK, false);
+	}
+	else
+	{
+		while (is_running(self))
+			usleep(40);
+	}
 	pthread_mutex_lock(&self->monitor_mt);
 	self->last_eat = get_ms();
 	self->has_eaten++;
@@ -48,7 +56,8 @@ static void	eat(t_philos *self)
 	log_philo(self, IS_EATING, false);
 	usleep(self->time_eat * 1000);
 	pthread_mutex_unlock(self->forks[0]);
-	pthread_mutex_unlock(self->forks[1]);
+	if (self->forks[1] != self->forks[0])
+		pthread_mutex_unlock(self->forks[1]);
 }
 
 static void	check_satiated(t_philos *self)
