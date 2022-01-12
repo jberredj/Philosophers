@@ -6,7 +6,7 @@
 /*   By: jberredj <jberredj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 19:06:43 by jberredj          #+#    #+#             */
-/*   Updated: 2021/12/30 23:44:33 by jberredj         ###   ########.fr       */
+/*   Updated: 2022/01/08 21:05:08 by jberredj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	check_satiated(t_table *table)
 		return (0);
 	satiated = 0;
 	pthread_mutex_lock(&table->satiated_mt);
-	if (table->philos_satiated == table->nbr_philos)
+	if (table->philos_satiated >= table->nbr_philos)
 		satiated = 1;
 	pthread_mutex_unlock(&table->satiated_mt);
 	if (satiated)
