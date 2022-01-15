@@ -6,7 +6,7 @@
 /*   By: jberredj <jberredj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 22:59:12 by jberredj          #+#    #+#             */
-/*   Updated: 2021/12/30 23:11:16 by jberredj         ###   ########.fr       */
+/*   Updated: 2022/01/15 15:30:29 by jberredj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <pthread.h>
+#include <unistd.h>
 #include "philosophers.h"
 
 uint64_t	get_ms(void)
@@ -41,4 +42,14 @@ void	set_philo_times(t_philos *self, t_args args)
 	self->time_eat = args.time_eat;
 	self->time_sleep = args.time_sleep;
 	self->must_eat = args.must_eat_nbr;
+	self->nbr_philos = args.nbr_philos;
+}
+
+void	my_usleep(int time)
+{
+	uint64_t	delay;
+
+	delay = get_ms() + time;
+	while (get_ms() < delay)
+		usleep(40);
 }

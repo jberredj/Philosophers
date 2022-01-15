@@ -6,7 +6,7 @@
 /*   By: jberredj <jberredj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 19:06:43 by jberredj          #+#    #+#             */
-/*   Updated: 2022/01/08 21:05:08 by jberredj         ###   ########.fr       */
+/*   Updated: 2022/01/15 16:13:57 by jberredj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,16 @@ void	join_philos(t_table *table)
 		pthread_join(table->philos[i].thread, NULL);
 }
 
-static int	check_satiated(t_table *table)
-{
-	int	satiated;
-
-	if (!table->must_eat)
-		return (0);
-	satiated = 0;
-	pthread_mutex_lock(&table->satiated_mt);
-	if (table->philos_satiated >= table->nbr_philos)
-		satiated = 1;
-	pthread_mutex_unlock(&table->satiated_mt);
-	if (satiated)
-	{
-		ft_putstr_fd("All philosophers are satiated\n", 1);
-		table->is_running = false;
-	}
-	return (satiated);
-}
-
 void	monitor_philos(t_table *table)
 {
 	int	i;
 
 	i = 0;
 	pthread_mutex_lock(&table->print_mt);
-	while (table->is_running && !check_satiated(table))
+	while (table->is_running)
 	{
 		pthread_mutex_unlock(&table->print_mt);
-		usleep(1000);
+		my_usleep(1);
 		pthread_mutex_lock(&table->philos[i].monitor_mt);
 		if (get_ms() - table->philos[i].last_eat > table->philos[i].time_die)
 		{
