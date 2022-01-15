@@ -6,7 +6,7 @@
 /*   By: jberredj <jberredj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 19:23:33 by jberredj          #+#    #+#             */
-/*   Updated: 2021/12/30 23:15:16 by jberredj         ###   ########.fr       */
+/*   Updated: 2022/01/15 15:19:22 by jberredj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ void		join_philos(t_table *table);
 bool		is_running(t_philos *self);
 void		set_philo_times(t_philos *self, t_args args);
 void		*philoshoper(void *arg);
+void		my_usleep(int time);
 #endif

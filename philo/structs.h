@@ -6,7 +6,7 @@
 /*   By: jberredj <jberredj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 18:56:54 by jberredj          #+#    #+#             */
-/*   Updated: 2021/12/30 23:27:49 by jberredj         ###   ########.fr       */
+/*   Updated: 2022/01/15 15:29:43 by jberredj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_args
 typedef struct s_philo
 {
 	uint64_t		id;
+	uint64_t		nbr_philos;
 	uint64_t		*time_begin;
 	uint64_t		time_die;
 	uint64_t		time_eat;
